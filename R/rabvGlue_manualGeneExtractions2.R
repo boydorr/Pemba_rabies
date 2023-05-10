@@ -19,7 +19,7 @@ library(viridis)
 library(dplyr)
 
 #input file
-file="~/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/ALL.aln.fasta"
+file="data/genetic/ALL.aln.fasta"
 
 #output files
 dir.create(file.path(paste(dirname(file), "output", sep="/")), showWarnings = FALSE)
