@@ -24,17 +24,17 @@ library(ggmsa)
 
 ## DATA#################
 ### trees
-gtree=read.tree("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/output/ALL.aln_g_pruned.fasta.treefile")
-ntree=read.tree("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/output/ALL.aln_n_pruned.fasta.treefile")
+gtree=read.tree("data/genetic/ALL.aln_g_pruned.fasta.treefile")
+ntree=read.tree("data/genetic/ALL.aln_n_pruned.fasta.treefile")
 
 ## metadata
-g.annot=read.csv("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/output/ALL.aln_g_meta.csv")
+g.annot=read.csv("data/genetic//ALL.aln_g_meta.csv")
 g.annot$sequence.gb_place_sampled[grep("RAB16|PM0|RAB12|RV2776|RV2777|RV2778|RV2817", g.annot$sequence.isolate, ignore.case=T)] = "Pemba Island"
 g.annot$sequence.gb_place_sampled[grep("RV2782", g.annot$sequence.isolate, ignore.case=T)] = "Zanzibar"
 g.annot$Pemba=NA
 g.annot$Pemba[grep("RAB16|PM0",g.annot$sequence.isolate, ignore.case=T)]="Outbreak"
 g.annot$Pemba[grep("RAB12005|RAB12039|Rab12002|RV2777|RV2778|RV2817|RAB12001|RV2782|RV2776",g.annot$sequence.isolate, ignore.case=T)]="Historical"
-n.annot=read.csv("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/output/ALL.aln_n_meta.csv")
+n.annot=read.csv("data/genetic/ALL.aln_n_meta.csv")
 n.annot$sequence.gb_place_sampled[grep("RAB16|PM0|RAB12|RV2776|RV2777|RV2778|RV2817", n.annot$sequence.isolate, ignore.case=T)] = "Pemba Island"
 n.annot$sequence.gb_place_sampled[grep("RV2782", n.annot$sequence.isolate, ignore.case=T)] = "Zanzibar"
 n.annot$Pemba=NA
@@ -43,8 +43,8 @@ n.annot$Pemba[grep("RAB12005|RAB12039|Rab12002|RV2777|RV2778|RV2817|RAB12001|RV2
 
 
 ### alignments
-n.aln=read.fasta("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/ALL.aln_n_pruned.fasta")
-g.aln=read.fasta("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/ALL.aln_g_pruned.fasta")
+n.aln=read.fasta("data/genetic/ALL.aln_n_pruned.fasta")
+g.aln=read.fasta("data/genetic/ALL.aln_g_pruned.fasta")
 
 ## G gene ####################
 ### tree manipulations
@@ -220,8 +220,8 @@ n.sub=n.aln[names(n.aln) %in% c(bi_subset_n$tip.label,bi_subset_n2$tip.label)]
 n.sub2=n.aln[names(n.aln) %in% bi_subset_n$tip.label]
 
 ##### bootstrapped sub trees
-g_bs=read.iqtree("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/g_af1a_subset_v2.contree")
-n_bs=read.iqtree("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/n_af1a_subset.contree")
+g_bs=read.iqtree("data/genetic/g_af1a_subset_v2.contree")
+n_bs=read.iqtree("data/genetic/n_af1a_subset.contree")
 
 ## plot n tree
 #drop the outgroup from plot
@@ -248,7 +248,7 @@ n_bs_tree$data$NGS=""
 n_bs_tree$data$NGS[grep("RAB16|RAB12005|RAB12039|Rab12002|RV2777|RV2778|RV2817|RAB12001|RV2782|RV2776",n_bs_tree$data$sequence.isolate, ignore.case=T)]="Illumina_metagenomic"
 n_bs_tree$data$NGS[grep("PM0|RAB16031|RAB16033",n_bs_tree$data$sequence.isolate, ignore.case=T)]="Minion_PCR"
 
-dna= readDNAStringSet("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/ALL.aln_n_subset.fasta")
+dna= readDNAStringSet("data/genetic/ALL.aln_n_subset.fasta")
 dna2=tidy_msa(dna)
 
 nb.cols <- 18
@@ -273,7 +273,7 @@ n_sub_final=n_bs_tree+ geom_tippoint(data=subset(n_bs_tree$data, !is.na(Pemba)),
 #geom_hilight(node=pm.mrca.n2, fill="gray", alpha=.6); rect; rect2
 # geom_fruit(geom=geom_bar,mapping=aes(y=label, x=length, fill=sequence.m49_country.display_name), pwidth=0.38, orientation="y",  stat="identity",axis.params = list(axis = "x"))  ; rect
 
-msaplot(p=n_sub_final, fasta="/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/ALL.aln_n_subset.fasta")
+msaplot(p=n_sub_final, fasta="data/genetic/ALL.aln_n_subset.fasta")
 
 ggarrange(rect2+labs(title="")+layout_circular()+theme(plot.margin = margin(t = 0,r = 0,b = 0,l = 0)),n_sub_final, ncol=2, common.legend = TRUE, legend="bottom", labels="AUTO", heights=c(1,2), widths=c(1,2))  
 
@@ -427,7 +427,7 @@ g_bs_tree$data$NGS=""
 g_bs_tree$data$NGS[grep("RAB16|RAB12005|RAB12039|Rab12002|RV2777|RV2778|RV2817|RAB12001|RV2782|RV2776",g_bs_tree$data$sequence.isolate, ignore.case=T)]="Illumina_metagenomic"
 g_bs_tree$data$NGS[grep("PM0|RAB16031|RAB16033",g_bs_tree$data$sequence.isolate, ignore.case=T)]="Minion_PCR"
 
-dna.g= readDNAStringSet("/Users/kirstyn/Documents/SEQUENCE_DATA/pemba/rabvGlue/LATEST/feb21/AF1a_outgp/ALL.aln_g_subset.fasta")
+dna.g= readDNAStringSet("data/genetic/ALL.aln_g_subset.fasta")
 dna2.g=tidy_msa(dna)
 
 nb.cols <- 18
