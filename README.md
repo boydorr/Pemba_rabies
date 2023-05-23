@@ -3,7 +3,7 @@ Authors: Kennedy Lushasi*, Kirstyn Brunker*, Malavika Rajeev, Elaine A Ferguson,
 
 This repository contains all the code and de-identified data in this study.
 
-Geographic masking was used to de-identify the spatial data on rabies transmission (mostly localized to households of either dog owners or persons bitten by rabid animals), by jittering XY locations within a 1km radius. Running the transmission tree code on these jittered data will therefore not generate precisely the same inferred progenitors as from the raw data because the very localized spatial structure is masked. The resulting consensus trees are provided from the original raw data.
+Geographic masking was used to de-identify the spatial data on rabies transmission (mostly localized to households of either dog owners or persons bitten by rabid animals), by jittering XY locations within a 1km radius. Running the transmission tree code on these jittered data will therefore not generate precisely the same inferred progenitors as from the raw data because the very localized spatial structure is masked. The resulting (transmission) consensus trees are provided from the original raw data.
 
 For more information: katie.hampson@glasgow.ac.uk
 
